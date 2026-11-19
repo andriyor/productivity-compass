@@ -1,5 +1,5 @@
-export type Goal = 'time' | 'notes' | 'tasks'
-export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear' | 'clickup' | 'lunatask' | 'griply'
+export type Goal = 'time' | 'notes' | 'tasks' | 'habits'
+export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear' | 'clickup' | 'lunatask' | 'griply' | 'loop' | 'streaks' | 'habitica'
 
 export type Tool = {
   name: string
@@ -13,6 +13,7 @@ export type Tool = {
   auto: 0 | 1 | 2 // manual · reminders / idle detection · fully automatic
   local: boolean // data lives on your device as files
   e2e?: boolean // synced, but end-to-end encrypted
+  pressure?: boolean // keeps score of every minute or slip (logs everything, punishes broken streaks)
   team: 0 | 1 | 2 | 3 // sharing & collaboration
   free: boolean // usable long-term without paying
   use: string[]
@@ -44,7 +45,7 @@ export const TOOLS: Record<ToolId, Tool> = {
     goals: ['time'],
     tagline: 'Tracks apps and sites in the background. You do nothing.',
     platforms: 'Desktop, mobile',
-    structure: 0.24, setup: 0.06, capture: 2, auto: 2, local: false, team: 1, free: false,
+    structure: 0.24, setup: 0.06, capture: 2, auto: 2, local: false, pressure: true, team: 1, free: false,
     use: ['You always forget timers', 'Seeing distraction patterns honestly', 'Focus sessions that block distracting sites'],
     avoid: ['Billing clients by task', 'Feeling watched — the data can feed anxiety'],
   },
@@ -122,7 +123,7 @@ export const TOOLS: Record<ToolId, Tool> = {
   },
   lunatask: {
     name: 'Lunatask',
-    goals: ['tasks', 'notes'],
+    goals: ['tasks', 'notes', 'habits'],
     tagline: 'Designed for ADHD brains: tasks that prioritise themselves, plus habits, journal and mood — end-to-end encrypted.',
     platforms: 'Windows, macOS, Linux, iOS, Android',
     structure: 0.5, setup: 0.42, capture: 2, auto: 0, local: false, e2e: true, team: 0, free: true,
@@ -131,12 +132,39 @@ export const TOOLS: Record<ToolId, Tool> = {
   },
   griply: {
     name: 'Griply',
-    goals: ['tasks'],
+    goals: ['tasks', 'habits'],
     tagline: 'Goal-first planner: every task and habit traces back to a goal and a life area.',
     platforms: 'Web, iOS',
     structure: 0.7, setup: 0.65, capture: 2, auto: 0, local: false, team: 0, free: true,
     use: ['Feeling busy but unsure it moves your goals', 'Goals → projects → tasks and habits, with progress charts', 'Plain-English quick add and time blocking'],
     avoid: ['Teams', 'Simple to-do lists — the goal layers are overhead', 'More than 2 goals on the free plan'],
+  },
+  loop: {
+    name: 'Loop Habit Tracker',
+    goals: ['habits'],
+    tagline: 'Free, open source, no account. Habit strength forgives a missed day.',
+    platforms: 'Android only',
+    structure: 0.02, setup: 0.25, capture: 2, auto: 1, local: true, team: 0, free: true,
+    use: ['Simple yes/no or numeric habits with reminders', 'A strength score instead of an all-or-nothing streak', 'Data stays on your phone'],
+    avoid: ['iPhone users', 'Habits linked to tasks or goals'],
+  },
+  streaks: {
+    name: 'Streaks',
+    goals: ['habits'],
+    tagline: 'Up to 24 habits; Apple Health ticks some off for you.',
+    platforms: 'iPhone, iPad, Apple Watch, Mac · one-time purchase',
+    structure: 0.86, setup: 0.14, capture: 2, auto: 2, local: false, pressure: true, team: 0, free: false,
+    use: ['Steps, workouts, mindful minutes completed automatically', 'A focused, beautiful daily checklist', 'Apple Watch on your wrist as the reminder'],
+    avoid: ['Android', 'Feeling crushed when a streak resets to zero'],
+  },
+  habitica: {
+    name: 'Habitica',
+    goals: ['habits'],
+    tagline: 'Your habits as a role-playing game: earn gold, level up, fight bosses with friends.',
+    platforms: 'Web, iOS, Android',
+    structure: 0.3, setup: 0.72, capture: 1, auto: 1, local: false, pressure: true, team: 2, free: true,
+    use: ['Rewards and novelty keep you coming back', 'Accountability: your party takes damage if you skip', 'Habits, dailies and to-dos together'],
+    avoid: ['When missing a daily (and losing health) feels like punishment', 'Wanting a calm, minimal tracker'],
   },
 }
 
@@ -146,7 +174,8 @@ export const GOALS: Record<Goal, { name: string; color: string; question: string
   time: { name: 'Time tracking', color: '#3987e5', question: 'Where did my hours go?' },
   notes: { name: 'Notes', color: '#d95926', question: 'Where do I put what I know?' },
   tasks: { name: 'Tasks', color: '#199e70', question: 'What do I do next?' },
+  habits: { name: 'Habits', color: '#cc5fa8', question: 'Am I actually doing it?' },
 }
 
-// A tool's colour on charts is its primary goal (validated 3-slot categorical palette).
+// A tool's colour on charts is its primary goal. Goal names always sit next to the colour, so it never carries meaning alone.
 export const colorOf = (id: ToolId) => GOALS[TOOLS[id].goals[0]].color

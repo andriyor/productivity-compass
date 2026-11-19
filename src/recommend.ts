@@ -49,7 +49,7 @@ export function recommend(a: Answers): Score[] {
       add(15, 'Deeply customisable — you’ll enjoy shaping it')
     }
 
-    if (a.watched === 'anxious' && t.auto === 2) add(-30, 'Logs every minute; that record can feed anxiety')
+    if (a.watched === 'anxious' && t.pressure) add(-30, 'Keeps score of every minute or slip; that can feed anxiety')
 
     // No time tracker stores data locally, so this would only shift them all equally.
     if (a.data === 'local' && a.goal !== 'time') {

@@ -40,3 +40,12 @@ test('end-to-end encryption counts for private-data users', () => {
   const luna = (a: Partial<Answers>) => recommend({ ...base, goal: 'tasks', ...a }).find((s) => s.id === 'lunatask')!.score
   assert.ok(luna({ data: 'local' }) > luna({ data: 'cloud' }))
 })
+test('private habit tracking on zero budget → Loop', () => {
+  assert.equal(top({ goal: 'habits', data: 'local', budget: 'free' }), 'loop')
+})
+test('anxious about broken streaks → not Streaks or Habitica', () => {
+  assert.ok(!['streaks', 'habitica'].includes(top({ goal: 'habits', watched: 'anxious' })))
+})
+test('forgetful habit builder → Streaks (Apple Health ticks habits off)', () => {
+  assert.equal(top({ goal: 'habits', forget: 'yes' }), 'streaks')
+})

@@ -10,6 +10,7 @@ const STYLES = [
   ['Starting', 'Forgets to start the timer or capture the idea', 'Hesitates to start until the system feels “right”'],
   ['Options', 'Novelty is fun — then the setup eats the week', 'Too many choices → freeze'],
   ['Tracking', 'Needs it automatic or it won’t happen', 'Minute-by-minute logs can feel like judgement'],
+  ['Habits', 'Streak apps work great — for two weeks', 'One broken streak feels like failure'],
   ['What helps', 'Instant capture, background tracking, few steps', 'Opinionated defaults, one trusted place, private data'],
 ]
 
@@ -32,7 +33,8 @@ export default function App() {
           The best tool is the one <span className="text-notes">you’ll still use</span> next month.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-ink-2">
-          Pick a <b className="text-time">time tracker</b>, a <b className="text-notes">notes app</b> and a <b className="text-tasks">task manager</b> by how
+          Pick a <b className="text-time">time tracker</b>, a <b className="text-notes">notes app</b>, a <b className="text-tasks">task manager</b> and a{' '}
+          <b className="text-habits">habit tracker</b> by how
           you work — alone or in a team, scattered or anxious — not by feature lists.
         </p>
         <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted">
@@ -45,8 +47,8 @@ export default function App() {
         </ul>
       </header>
 
-      <Section n="01" title="Three jobs, three questions" lead="Most people need one tool per job. Some tools cover two — that’s a bonus, not a requirement.">
-        <div className="grid gap-3 sm:grid-cols-3">
+      <Section n="01" title="Four jobs, four questions" lead="Most people need one tool per job. Some tools cover two — that’s a bonus, not a requirement.">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(GOALS) as Goal[]).map((g) => (
             <div key={g} className="rounded-xl bg-surface p-5 ring-1 ring-white/10" style={{ borderTop: `3px solid ${GOALS[g].color}` }}>
               <h3 className="font-semibold">{GOALS[g].name}</h3>
@@ -99,8 +101,8 @@ export default function App() {
         <Chooser answers={answers} onChange={setAnswers} />
       </Section>
 
-      <Section n="05" title="Your stack" lead="The same answers, applied to all three jobs.">
-        <div className="grid gap-3 sm:grid-cols-3">
+      <Section n="05" title="Your stack" lead="The same answers, applied to all four jobs.">
+        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(GOALS) as Goal[]).map((g) => {
             const best = recommend({ ...answers, goal: g })[0]
             return (

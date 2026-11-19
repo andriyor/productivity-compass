@@ -4,7 +4,7 @@ import { colorOf, GOALS, TOOLS, type Goal } from '../tools.ts'
 
 type Option<K extends keyof Answers> = { value: Answers[K]; label: string }
 // `goals` limits a question to the goals it changes the answer for; `q` may be worded per goal.
-const QUESTIONS: { [K in keyof Answers]: { q: string | Record<Goal, string>; goals?: Goal[]; options: Option<K>[] } } = {
+const QUESTIONS: { [K in keyof Answers]: { q: string | Partial<Record<Goal, string>>; goals?: Goal[]; options: Option<K>[] } } = {
   goal: {
     q: 'What do you want to fix first?',
     options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: GOALS[g].name })),
@@ -21,6 +21,7 @@ const QUESTIONS: { [K in keyof Answers]: { q: string | Record<Goal, string>; goa
       time: 'Do you forget to start the timer?',
       notes: 'Do you lose thoughts before you write them down?',
       tasks: 'Do to-dos slip away before you write them down?',
+      habits: 'Do you forget to do — or log — your habits?',
     },
     options: [
       { value: 'no', label: 'Rarely' },
@@ -36,8 +37,11 @@ const QUESTIONS: { [K in keyof Answers]: { q: string | Record<Goal, string>; goa
     ],
   },
   watched: {
-    q: 'Seeing every minute of your day logged makes you…',
-    goals: ['time'],
+    q: {
+      time: 'Seeing every minute of your day logged makes you…',
+      habits: 'A broken streak makes you…',
+    },
+    goals: ['time', 'habits'],
     options: [
       { value: 'motivated', label: 'motivated' },
       { value: 'anxious', label: 'anxious' },
@@ -45,7 +49,7 @@ const QUESTIONS: { [K in keyof Answers]: { q: string | Record<Goal, string>; goa
   },
   data: {
     q: 'Where should your data live?',
-    goals: ['notes', 'tasks'], // no time tracker here stores data locally
+    goals: ['notes', 'tasks', 'habits'], // no time tracker here stores data locally
     options: [
       { value: 'cloud', label: 'Anywhere, synced' },
       { value: 'local', label: 'On my device' },
