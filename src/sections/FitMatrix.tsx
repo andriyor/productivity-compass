@@ -79,9 +79,10 @@ export function FitMatrix() {
           </button>
         ))}
       </div>
-      <div className="overflow-x-auto">
+      {/* A scroll container would trap the sticky header, so it only scrolls sideways where the table doesn’t fit. */}
+      <div className="overflow-x-auto xl:overflow-visible">
         <table className={`w-full border-separate border-spacing-[2px] text-sm ${goal === 'all' ? 'min-w-[1000px]' : ''}`}>
-          <thead>
+          <thead className="sticky top-0 z-10 bg-surface [&_th]:bg-surface">
             <tr>
               <th />
               {groups.map((g, k) => (
@@ -93,9 +94,9 @@ export function FitMatrix() {
               ))}
             </tr>
             <tr>
-              <th className="text-left align-bottom font-normal text-muted">If this sounds like you…</th>
+              <th className="min-w-[12rem] text-left align-bottom font-normal text-muted">If this sounds like you…</th>
               {ids.map((id, j) => (
-                <th key={id} className={`w-[4.25rem] pt-2 pb-2 text-center text-xs font-medium text-ink ${gap(j)}`}>
+                <th key={id} className={`w-[3.9rem] pt-2 pb-2 text-center text-[11px] leading-tight font-medium text-ink ${gap(j)}`}>
                   <ToolIcon id={id} size={18} className="mx-auto mb-1" />
                   {TOOLS[id].name}
                 </th>
