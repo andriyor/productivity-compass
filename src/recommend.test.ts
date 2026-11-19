@@ -49,3 +49,6 @@ test('anxious about broken streaks → not Streaks or Habitica', () => {
 test('forgetful habit builder → Streaks (Apple Health ticks habits off)', () => {
   assert.equal(top({ goal: 'habits', forget: 'yes' }), 'streaks')
 })
+test('private tinkerer tracking habits → Obsidian (Life Tracker plugin)', () => {
+  assert.equal(top({ goal: 'habits', options: 'tinker', data: 'local' }), 'obsidian')
+})

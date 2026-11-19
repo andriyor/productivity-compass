@@ -23,9 +23,9 @@ const ROW_GROUPS: { title: string; rows: Row[] }[] = [
   {
     title: 'Building habits',
     rows: [
-      { s: 'A broken streak makes me feel guilty or quit', fit: { todoist: 1, lunatask: 2, griply: 2, loop: 3, streaks: 1 }, why: 'Loop scores habit strength, so a missed day dents it instead of wiping it out. Streak counters reset to zero; Habitica even takes your health.' },
-      { s: 'Points, levels and rewards keep me going', fit: { todoist: 1, lunatask: 1, griply: 1, streaks: 1, habitica: 3 }, why: 'Habitica turns habits into a role-playing game with friends. Novelty and rewards help many ADHD brains — plan for the day the novelty wears off.' },
-      { s: 'I want habits next to my tasks and goals', fit: { obsidian: 1, notion: 1, todoist: 1, lunatask: 3, griply: 3, habitica: 2 }, why: 'Lunatask and Griply put habits beside tasks (and goals, in Griply), so one app is the whole day. Notion and Obsidian can if you build the template.' },
+      { s: 'A broken streak makes me feel guilty or quit', fit: { obsidian: 2, todoist: 1, lunatask: 2, griply: 2, loop: 3, streaks: 1 }, why: 'Loop scores habit strength, so a missed day dents it instead of wiping it out; Obsidian’s Life Tracker plugin can set weekly goals like “3 days a week”. Streak counters reset to zero; Habitica even takes your health.' },
+      { s: 'Points, levels and rewards keep me going', fit: { obsidian: 1, todoist: 1, lunatask: 1, griply: 1, streaks: 1, habitica: 3 }, why: 'Habitica turns habits into a role-playing game with friends. Novelty and rewards help many ADHD brains — plan for the day the novelty wears off.' },
+      { s: 'I want habits next to my tasks and goals', fit: { obsidian: 2, notion: 1, todoist: 1, lunatask: 3, griply: 3, habitica: 2 }, why: 'Lunatask and Griply put habits beside tasks (and goals, in Griply), so one app is the whole day. In Obsidian, habits live as properties in the same daily note as your journal and tasks.' },
       { s: 'Tick habits off automatically (steps, workouts)', fit: { streaks: 3 }, why: 'Streaks reads Apple Health: walk your steps or log a workout and the habit completes itself.' },
     ],
   },

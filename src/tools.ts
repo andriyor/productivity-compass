@@ -60,11 +60,11 @@ export const TOOLS: Record<ToolId, Tool> = {
   },
   obsidian: {
     name: 'Obsidian',
-    goals: ['notes', 'tasks'],
+    goals: ['notes', 'tasks', 'habits'],
     tagline: 'Plain Markdown files on your disk, linked into a second brain.',
     platforms: 'Desktop, mobile',
     structure: 0.5, setup: 0.85, capture: 1, auto: 0, local: true, team: 1, free: true,
-    use: ['Owning your data forever as plain files', 'Linking ideas, long-term knowledge', 'Tinkerers: thousands of plugins'],
+    use: ['Owning your data forever as plain files', 'Linking ideas, long-term knowledge', 'Habits in your daily notes with the Life Tracker plugin: heatmaps, streaks, weekly goals like “3 days a week”', 'Tinkerers: thousands of plugins'],
     avoid: ['If configuring becomes the work instead of the work', 'Real-time team editing'],
   },
   logseq: {
