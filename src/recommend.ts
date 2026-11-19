@@ -49,7 +49,8 @@ export function recommend(a: Answers): Score[] {
 
     if (a.watched === 'anxious' && t.auto === 2) add(-30, 'Logs every minute; that record can feed anxiety')
 
-    if (a.data === 'local') {
+    // No time tracker stores data locally, so this would only shift them all equally.
+    if (a.data === 'local' && a.goal !== 'time') {
       if (t.local) add(20, 'Your data stays as files on your device')
       else add(-10, 'Data lives on their servers')
     }

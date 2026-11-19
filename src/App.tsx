@@ -95,7 +95,7 @@ export default function App() {
         <Landscape marker={markerFor(answers)} />
       </Section>
 
-      <Section n="04" title="Which one for me?" lead="Seven quick questions. The recommendation and the map update as you click.">
+      <Section n="04" title="Which one for me?" lead="Pick a goal first: you only get the questions that matter for it. The recommendation and the map update as you click.">
         <Chooser answers={answers} onChange={setAnswers} />
       </Section>
 

@@ -33,3 +33,6 @@ test('only tools for the chosen goal, scores within 0..100', () => {
     assert.ok(s.score >= 0 && s.score <= 100)
   }
 })
+test('local-data preference does not penalise time trackers', () => {
+  assert.deepEqual(recommend({ ...base, data: 'local' }), recommend(base))
+})

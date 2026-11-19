@@ -3,7 +3,8 @@ import { ToolIcon } from '../ToolIcon.tsx'
 import { colorOf, GOALS, TOOLS, type Goal } from '../tools.ts'
 
 type Option<K extends keyof Answers> = { value: Answers[K]; label: string }
-const QUESTIONS: { [K in keyof Answers]: { q: string; options: Option<K>[] } } = {
+// `goals` limits a question to the goals it changes the answer for; `q` may be worded per goal.
+const QUESTIONS: { [K in keyof Answers]: { q: string | Record<Goal, string>; goals?: Goal[]; options: Option<K>[] } } = {
   goal: {
     q: 'What do you want to fix first?',
     options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: GOALS[g].name })),
@@ -16,7 +17,11 @@ const QUESTIONS: { [K in keyof Answers]: { q: string; options: Option<K>[] } } =
     ],
   },
   forget: {
-    q: 'Do you forget to start timers, or lose thoughts before you write them down?',
+    q: {
+      time: 'Do you forget to start the timer?',
+      notes: 'Do you lose thoughts before you write them down?',
+      tasks: 'Do to-dos slip away before you write them down?',
+    },
     options: [
       { value: 'no', label: 'Rarely' },
       { value: 'yes', label: 'All the time' },
@@ -32,6 +37,7 @@ const QUESTIONS: { [K in keyof Answers]: { q: string; options: Option<K>[] } } =
   },
   watched: {
     q: 'Seeing every minute of your day logged makes you…',
+    goals: ['time'],
     options: [
       { value: 'motivated', label: 'motivated' },
       { value: 'anxious', label: 'anxious' },
@@ -39,6 +45,7 @@ const QUESTIONS: { [K in keyof Answers]: { q: string; options: Option<K>[] } } =
   },
   data: {
     q: 'Where should your data live?',
+    goals: ['notes', 'tasks'], // no time tracker here stores data locally
     options: [
       { value: 'cloud', label: 'Anywhere, synced' },
       { value: 'local', label: 'On my device' },
@@ -60,9 +67,11 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       <div className="space-y-5">
-        {(Object.keys(QUESTIONS) as (keyof Answers)[]).map((k) => (
+        {(Object.keys(QUESTIONS) as (keyof Answers)[]).filter((k) => QUESTIONS[k].goals?.includes(answers.goal) ?? true).map((k) => {
+          const { q } = QUESTIONS[k]
+          return (
           <fieldset key={k}>
-            <legend className="mb-2 text-sm text-ink-2">{QUESTIONS[k].q}</legend>
+            <legend className="mb-2 text-sm text-ink-2">{typeof q === 'string' ? q : q[answers.goal]}</legend>
             <div className="flex flex-wrap gap-1 rounded-lg bg-surface p-1 ring-1 ring-white/10">
               {QUESTIONS[k].options.map((o) => {
                 const on = answers[k] === o.value
@@ -79,7 +88,8 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
               })}
             </div>
           </fieldset>
-        ))}
+          )
+        })}
       </div>
 
       <div className="rounded-xl bg-surface p-5 ring-1 ring-white/10" aria-live="polite">
