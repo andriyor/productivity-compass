@@ -1,4 +1,4 @@
-import { siApple, siClockify, siLinear, siLogseq, siNotion, siObsidian, siRescuetime, siThings, siTodoist, siToggl } from 'simple-icons'
+import { siApple, siClickup, siClockify, siLinear, siLogseq, siNotion, siObsidian, siRescuetime, siThings, siTodoist, siToggl } from 'simple-icons'
 import type { ToolId } from './tools.ts'
 
 // Brand colours from Simple Icons, except where they vanish on the dark surface (< 3:1):
@@ -14,6 +14,7 @@ const ICONS: Record<ToolId, { path: string; color: string }> = {
   things: { path: siThings.path, color: `#${siThings.hex}` },
   todoist: { path: siTodoist.path, color: `#${siTodoist.hex}` },
   linear: { path: siLinear.path, color: '#8b93ff' },
+  clickup: { path: siClickup.path, color: `#${siClickup.hex}` },
 }
 
 // Works both in HTML and nested inside another <svg> (x/y position it there).

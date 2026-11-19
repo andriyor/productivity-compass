@@ -23,13 +23,13 @@ test('private tinkerer → Obsidian', () => {
 test('team notes → Notion', () => {
   assert.equal(top({ goal: 'notes', who: 'team' }), 'notion')
 })
-test('team tasks → Linear or Notion in top two', () => {
+test('team tasks → Linear and ClickUp in top two', () => {
   const ids = recommend({ ...base, goal: 'tasks', who: 'team' }).slice(0, 2).map((s) => s.id)
-  assert.deepEqual(ids.sort(), ['linear', 'notion'])
+  assert.deepEqual(ids.sort(), ['clickup', 'linear'])
 })
 test('only tools for the chosen goal, scores within 0..100', () => {
   for (const s of recommend({ ...base, goal: 'time', who: 'team', forget: 'yes', options: 'overwhelm', watched: 'anxious', data: 'local', budget: 'free' })) {
-    assert.ok(['toggl', 'clockify', 'rescuetime'].includes(s.id))
+    assert.ok(['toggl', 'clockify', 'rescuetime', 'clickup'].includes(s.id))
     assert.ok(s.score >= 0 && s.score <= 100)
   }
 })

@@ -1,5 +1,5 @@
 export type Goal = 'time' | 'notes' | 'tasks'
-export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear'
+export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear' | 'clickup'
 
 export type Tool = {
   name: string
@@ -109,6 +109,15 @@ export const TOOLS: Record<ToolId, Tool> = {
     structure: 0.92, setup: 0.55, capture: 1, auto: 0, local: false, team: 3, free: true,
     use: ['Sprints, cycles, roadmaps', 'Engineering and product teams'],
     avoid: ['Personal life to-dos', 'Non-software teams'],
+  },
+  clickup: {
+    name: 'ClickUp',
+    goals: ['tasks', 'time'],
+    tagline: 'Tasks, docs and time tracking in one heavily configurable workspace.',
+    platforms: 'Web, desktop, mobile, browser extension',
+    structure: 0.97, setup: 0.78, capture: 1, auto: 0, local: false, team: 3, free: true,
+    use: ['Teams that want tasks, docs and time in one tool', 'Many views: list, board, Gantt, calendar', 'Agencies tracking time against client tasks'],
+    avoid: ['Anyone who freezes at options — it is famously dense', 'Quick personal to-dos'],
   },
 }
 

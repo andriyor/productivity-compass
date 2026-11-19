@@ -25,6 +25,8 @@ export function recommend(a: Answers): Score[] {
       why.push((n > 0 ? '+ ' : '− ') + w)
     }
 
+    if (t.goals[0] !== a.goal) add(-10, 'A side feature here, not its main job')
+
     if (a.who === 'team') {
       if (t.team === 3) add(25, 'Built for teams: sharing, permissions, admin')
       else if (t.team === 2) add(5, 'Light sharing is possible')
