@@ -54,6 +54,7 @@ export function recommend(a: Answers): Score[] {
     // No time tracker stores data locally, so this would only shift them all equally.
     if (a.data === 'local' && a.goal !== 'time') {
       if (t.local) add(20, 'Your data stays as files on your device')
+      else if (t.e2e) add(10, 'End-to-end encrypted: synced, but only you can read it')
       else add(-10, 'Data lives on their servers')
     }
 

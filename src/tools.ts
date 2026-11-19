@@ -1,5 +1,5 @@
 export type Goal = 'time' | 'notes' | 'tasks'
-export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear' | 'clickup'
+export type ToolId = 'toggl' | 'clockify' | 'rescuetime' | 'applenotes' | 'obsidian' | 'logseq' | 'notion' | 'things' | 'todoist' | 'linear' | 'clickup' | 'lunatask' | 'griply'
 
 export type Tool = {
   name: string
@@ -12,6 +12,7 @@ export type Tool = {
   capture: 0 | 1 | 2 // how fast a thought or timer gets in: slow · ok · instant
   auto: 0 | 1 | 2 // manual · reminders / idle detection · fully automatic
   local: boolean // data lives on your device as files
+  e2e?: boolean // synced, but end-to-end encrypted
   team: 0 | 1 | 2 | 3 // sharing & collaboration
   free: boolean // usable long-term without paying
   use: string[]
@@ -118,6 +119,24 @@ export const TOOLS: Record<ToolId, Tool> = {
     structure: 0.97, setup: 0.78, capture: 1, auto: 0, local: false, team: 3, free: true,
     use: ['Teams that want tasks, docs and time in one tool', 'Many views: list, board, Gantt, calendar', 'Agencies tracking time against client tasks'],
     avoid: ['Anyone who freezes at options — it is famously dense', 'Quick personal to-dos'],
+  },
+  lunatask: {
+    name: 'Lunatask',
+    goals: ['tasks', 'notes'],
+    tagline: 'Designed for ADHD brains: tasks that prioritise themselves, plus habits, journal and mood — end-to-end encrypted.',
+    platforms: 'Windows, macOS, Linux, iOS, Android',
+    structure: 0.5, setup: 0.42, capture: 2, auto: 0, local: false, e2e: true, team: 0, free: true,
+    use: ['Automatic prioritisation bubbles the next task up, with a work-in-progress limit', 'Time blocking: drag tasks and habits onto your calendar', 'Habits, journal and mood next to your tasks', 'End-to-end encrypted: privacy without managing files'],
+    avoid: ['Teams and shared projects', 'Wanting plain files you fully control', 'Many life areas on the free plan (limited to 2)'],
+  },
+  griply: {
+    name: 'Griply',
+    goals: ['tasks'],
+    tagline: 'Goal-first planner: every task and habit traces back to a goal and a life area.',
+    platforms: 'Web, iOS',
+    structure: 0.7, setup: 0.65, capture: 2, auto: 0, local: false, team: 0, free: true,
+    use: ['Feeling busy but unsure it moves your goals', 'Goals → projects → tasks and habits, with progress charts', 'Plain-English quick add and time blocking'],
+    avoid: ['Teams', 'Simple to-do lists — the goal layers are overhead', 'More than 2 goals on the free plan'],
   },
 }
 

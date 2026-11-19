@@ -36,3 +36,7 @@ test('only tools for the chosen goal, scores within 0..100', () => {
 test('local-data preference does not penalise time trackers', () => {
   assert.deepEqual(recommend({ ...base, data: 'local' }), recommend(base))
 })
+test('end-to-end encryption counts for private-data users', () => {
+  const luna = (a: Partial<Answers>) => recommend({ ...base, goal: 'tasks', ...a }).find((s) => s.id === 'lunatask')!.score
+  assert.ok(luna({ data: 'local' }) > luna({ data: 'cloud' }))
+})
