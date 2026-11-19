@@ -5,6 +5,7 @@ import { GOALS, TOOL_IDS, TOOLS, type Goal } from './tools.ts'
 import { Chooser } from './sections/Chooser.tsx'
 import { FitMatrix } from './sections/FitMatrix.tsx'
 import { Landscape } from './sections/Landscape.tsx'
+import { Venn } from './sections/Venn.tsx'
 
 const STYLES = [
   ['Starting', 'Forgets to start the timer or capture the idea', 'Hesitates to start until the system feels “right”'],
@@ -47,23 +48,12 @@ export default function App() {
         </ul>
       </header>
 
-      <Section n="01" title="Four jobs, four questions" lead="Most people need one tool per job. Some tools cover two — that’s a bonus, not a requirement.">
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-          {(Object.keys(GOALS) as Goal[]).map((g) => (
-            <div key={g} className="rounded-xl bg-surface p-5 ring-1 ring-white/10" style={{ borderTop: `3px solid ${GOALS[g].color}` }}>
-              <h3 className="font-semibold">{GOALS[g].name}</h3>
-              <p className="mt-1 text-ink-2">“{GOALS[g].question}”</p>
-              <ul className="mt-4 flex flex-wrap gap-x-4 gap-y-2 text-sm text-ink-2">
-                {TOOL_IDS.filter((id) => TOOLS[id].goals.includes(g)).map((id) => (
-                  <li key={id} className="flex items-center gap-1.5">
-                    <ToolIcon id={id} size={14} />
-                    {TOOLS[id].name}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
-        </div>
+      <Section
+        n="01"
+        title="Four jobs, four questions"
+        lead="Most people need one tool per job. Tools in the overlaps cover several — and every overlap runs through tasks."
+      >
+        <Venn />
       </Section>
 
       <Section
