@@ -56,8 +56,8 @@ export default function App() {
           The best tool is the one <span className="text-notes">you’ll still use</span> next month.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-ink-2">
-          Find tools for the jobs you actually need: <b className="text-notes">notes</b>, <b className="text-tasks">tasks</b> and{' '}
-          <b className="text-habits">habits</b>. <b className="text-time">Time tracking is optional</b> — use it when you have a concrete reason, like billing or estimating work.
+          Pick tools for the jobs you actually need — <b className="text-notes">notes</b>, <b className="text-tasks">tasks</b> and{' '}
+          <b className="text-habits">habits</b> — by how you work, not by feature lists. <b className="text-time">Time tracking is optional</b>: use it when you have a clear reason, like billing or estimating.
         </p>
         <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted">
           {TOOL_IDS.map((id) => (
@@ -72,7 +72,7 @@ export default function App() {
       <Section
         n="01"
         title="Four possible jobs, four questions"
-        lead="Choose tools for the needs you want to solve. Time tracking can help with a concrete question or requirement; tools in the overlaps cover several jobs."
+        lead="Pick tools for the jobs you actually have. Time tracking helps when it answers a specific question or requirement; tools in the overlaps cover more than one job."
       >
         <Venn />
       </Section>
