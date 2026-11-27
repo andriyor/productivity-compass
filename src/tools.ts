@@ -171,10 +171,10 @@ export const TOOLS: Record<ToolId, Tool> = {
 export const TOOL_IDS = Object.keys(TOOLS) as ToolId[]
 
 export const GOALS: Record<Goal, { name: string; color: string; question: string }> = {
-  time: { name: 'Time tracking', color: '#3987e5', question: 'Where did my hours go?' },
   notes: { name: 'Notes', color: '#d95926', question: 'Where do I put what I know?' },
   tasks: { name: 'Tasks', color: '#199e70', question: 'What do I do next?' },
   habits: { name: 'Habits', color: '#cc5fa8', question: 'Am I actually doing it?' },
+  time: { name: 'Time tracking', color: '#3987e5', question: 'Where did my hours go?' },
 }
 
 // A tool's colour on charts is its primary goal. Goal names always sit next to the colour, so it never carries meaning alone.

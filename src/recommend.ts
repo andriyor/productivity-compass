@@ -2,6 +2,9 @@ import { TOOL_IDS, TOOLS, type Goal, type ToolId } from './tools.ts'
 
 export type Answers = {
   goal: Goal
+  notesNeed: 'yes' | 'no'
+  tasksNeed: 'yes' | 'no'
+  habitsNeed: 'yes' | 'no'
   timeBilling: 'yes' | 'no'
   timeEstimates: 'yes' | 'no'
   timeInsight: 'yes' | 'no'
@@ -19,9 +22,15 @@ export type Score = { id: ToolId; score: number; why: string[] }
 export const hasTimeTrackingNeed = (a: Answers) =>
   a.timeBilling === 'yes' || a.timeEstimates === 'yes' || a.timeInsight === 'yes' || a.timeFocus === 'yes'
 
+export function hasGoalNeed(a: Answers, goal: Goal = a.goal) {
+  if (goal === 'time') return hasTimeTrackingNeed(a)
+  const needAnswer = { notes: 'notesNeed', tasks: 'tasksNeed', habits: 'habitsNeed' } as const
+  return a[needAnswer[goal]] === 'yes'
+}
+
 // shortcut: hand-tuned heuristic weights for guidance, not research; tune with real user feedback.
 export function recommend(a: Answers): Score[] {
-  if (a.goal === 'time' && !hasTimeTrackingNeed(a)) return []
+  if (!hasGoalNeed(a)) return []
 
   const out: Score[] = []
   for (const id of TOOL_IDS) {

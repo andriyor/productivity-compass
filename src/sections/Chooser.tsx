@@ -1,4 +1,4 @@
-import { hasTimeTrackingNeed, recommend, type Answers } from '../recommend.ts'
+import { hasGoalNeed, recommend, type Answers } from '../recommend.ts'
 import { ToolIcon } from '../ToolIcon.tsx'
 import { colorOf, GOALS, TOOLS, type Goal } from '../tools.ts'
 
@@ -8,6 +8,30 @@ const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, st
   goal: {
     q: 'What do you want to fix first? Time tracking is optional.',
     options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: GOALS[g].name })),
+  },
+  notesNeed: {
+    q: 'Is it hard to capture or find things with what you use now?',
+    goals: ['notes'],
+    options: [
+      { value: 'yes', label: 'Yes, I want help' },
+      { value: 'no', label: 'No, my current method works' },
+    ],
+  },
+  tasksNeed: {
+    q: 'Do tasks get forgotten, or is it hard to decide what to do next?',
+    goals: ['tasks'],
+    options: [
+      { value: 'yes', label: 'Yes, I want help' },
+      { value: 'no', label: 'No, my current method works' },
+    ],
+  },
+  habitsNeed: {
+    q: 'Are you trying to build a routine and want a way to track it?',
+    goals: ['habits'],
+    options: [
+      { value: 'yes', label: 'Yes, I want help' },
+      { value: 'no', label: 'No, my current method works' },
+    ],
   },
   timeBilling: {
     q: 'Do you need to submit timesheets or bill clients by the hour?',
@@ -97,16 +121,22 @@ const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, st
 }
 
 const TIME_SCREENING_QUESTIONS: (keyof Answers)[] = ['timeBilling', 'timeEstimates', 'timeInsight', 'timeFocus']
+const CORE_NEED_QUESTIONS: (keyof Answers)[] = ['notesNeed', 'tasksNeed', 'habitsNeed']
+const NEED_QUESTION: Record<Exclude<Goal, 'time'>, keyof Answers> = {
+  notes: 'notesNeed',
+  tasks: 'tasksNeed',
+  habits: 'habitsNeed',
+}
 
 export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a: Answers) => void }) {
   const scores = recommend(answers)
   const first = scores[0]
-  const noTimeTrackingNeeded = answers.goal === 'time' && !hasTimeTrackingNeed(answers)
+  const noNeedForGoal = !hasGoalNeed(answers)
   const visibleOtherQuestions = (Object.keys(QUESTIONS) as (keyof Answers)[]).filter((k) => {
-    if (k === 'goal' || TIME_SCREENING_QUESTIONS.includes(k)) return false
+    if (k === 'goal' || TIME_SCREENING_QUESTIONS.includes(k) || CORE_NEED_QUESTIONS.includes(k)) return false
     const question = QUESTIONS[k]
     if (question.goals && !question.goals.includes(answers.goal)) return false
-    if (answers.goal === 'time' && !hasTimeTrackingNeed(answers)) return false
+    if (noNeedForGoal) return false
     return true
   })
   const renderQuestion = (k: keyof Answers) => {
@@ -137,6 +167,7 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
     <div className="grid gap-6 lg:grid-cols-2">
       <div className="space-y-5">
         {renderQuestion('goal')}
+        {answers.goal !== 'time' && renderQuestion(NEED_QUESTION[answers.goal])}
         {answers.goal === 'time' && (
           <div className="space-y-4 rounded-xl border border-time/30 bg-time/5 p-4">
             <div>
@@ -157,11 +188,17 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
       </div>
 
       <div className="rounded-xl bg-surface p-5 ring-1 ring-white/10" aria-live="polite">
-        {noTimeTrackingNeeded ? (
+        {noNeedForGoal && answers.goal === 'time' ? (
           <>
             <p className="text-xs uppercase tracking-wide text-muted">Time tracking</p>
             <p className="mt-1 text-3xl font-semibold">You probably don’t need a time tracker</p>
             <p className="mt-2 text-ink-2">You didn’t mark a reason that needs a timer. Focus on finished work and deadlines instead — and revisit this if you start billing hours or need data on where your time goes.</p>
+          </>
+        ) : noNeedForGoal ? (
+          <>
+            <p className="text-xs uppercase tracking-wide text-muted">{GOALS[answers.goal].name}</p>
+            <p className="mt-1 text-3xl font-semibold">Your current method may be enough</p>
+            <p className="mt-2 text-ink-2">You said your current way of handling {GOALS[answers.goal].name.toLowerCase()} works. Stick with it unless something starts slipping or taking too much effort.</p>
           </>
         ) : first ? (
           <>
@@ -174,7 +211,7 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
           </>
         ) : null}
 
-        {!noTimeTrackingNeeded && <ul className="mt-6 space-y-3" aria-label="Fit score per tool">
+        {!noNeedForGoal && <ul className="mt-6 space-y-3" aria-label="Fit score per tool">
           {scores.map((s) => (
             <li key={s.id} className="grid grid-cols-[8.5rem_1fr_2.5rem] items-center gap-3 text-sm">
               <span className="flex items-center gap-2 text-ink-2">
@@ -189,7 +226,7 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
           ))}
         </ul>}
 
-        {first && !noTimeTrackingNeeded && <>
+        {first && !noNeedForGoal && <>
           <h4 className="mt-6 text-sm font-medium">Why {TOOLS[first.id].name}</h4>
           <ul className="mt-2 space-y-1 text-sm text-ink-2">
             {first.why.length ? first.why.map((w) => <li key={w} className={w.startsWith('+') ? '' : 'text-muted'}>{w}</li>) : <li className="text-muted">A solid default for this goal.</li>}

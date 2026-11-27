@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { siGithub } from 'simple-icons'
-import { hasTimeTrackingNeed, markerFor, recommend, type Answers } from './recommend.ts'
+import { hasGoalNeed, markerFor, recommend, type Answers } from './recommend.ts'
 import { ToolIcon } from './ToolIcon.tsx'
 import { GOALS, TOOL_IDS, TOOLS, type Goal } from './tools.ts'
 import { Chooser } from './sections/Chooser.tsx'
@@ -19,6 +19,9 @@ const STYLES = [
 export default function App() {
   const [answers, setAnswers] = useState<Answers>({
     goal: 'notes',
+    notesNeed: 'yes',
+    tasksNeed: 'yes',
+    habitsNeed: 'yes',
     timeBilling: 'no',
     timeEstimates: 'no',
     timeInsight: 'no',
@@ -108,24 +111,24 @@ export default function App() {
         <Landscape marker={markerFor(answers)} />
       </Section>
 
-      <Section n="04" title="Which one for me?" lead="Pick a goal first: you only get the questions that matter for it. The recommendation and the map update as you click.">
+      <Section n="04" title="Which one for me?" lead="Pick a goal first. Notes, tasks and habits start by checking whether your current method works; time tracking asks what you need it for. The recommendation and map update as you click.">
         <Chooser answers={answers} onChange={setAnswers} />
       </Section>
 
-      <Section n="05" title="Possible toolkit" lead="Your answers above applied across every job — with time tracking skipped unless you need it for billing, estimates, focus or seeing where hours go.">
+      <Section n="05" title="Possible toolkit" lead="Your answers above applied across every job. Keep your current method where it works; time tracking stays optional.">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(GOALS) as Goal[]).map((g) => {
             const best = recommend({ ...answers, goal: g })[0]
-            const noTimeTracker = g === 'time' && !hasTimeTrackingNeed(answers)
+            const noNeed = !hasGoalNeed(answers, g)
             return (
               <div key={g} className="rounded-xl bg-surface p-5 ring-1 ring-white/10" style={{ borderTop: `3px solid ${GOALS[g].color}` }}>
                 <p className="text-xs uppercase tracking-wide text-muted">{g === 'time' ? 'Optional · Time tracking' : GOALS[g].name}</p>
-                {noTimeTracker ? (
+                {noNeed ? (
                   <>
-                    <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
-                    <p className="mt-2 text-sm text-ink-2">
-                      Pick “Time tracking” in 04 if you bill hours, refine estimates, see where your hours go, or use a timer to focus.
-                    </p>
+                    <p className="mt-2 text-xl font-semibold">{g === 'time' ? 'You probably don’t need a time tracker' : 'Your current setup may be enough'}</p>
+                    <p className="mt-2 text-sm text-ink-2">{g === 'time'
+                      ? 'Pick “Time tracking” in 04 if you bill hours, refine estimates, see where your hours go, or use a timer to focus.'
+                      : `You said your current way of handling ${GOALS[g].name.toLowerCase()} works for you.`}</p>
                   </>
                 ) : best && (
                   <>
