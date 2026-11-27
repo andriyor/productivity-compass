@@ -10,7 +10,7 @@ A visual guide to choosing tools for **notes**, **tasks** and **habits**, with *
 2. **It depends on your brain.** ADHD-ish and anxious-ish working styles side by side: starting, options, tracking, habits, and what helps. Working styles, not diagnoses.
 3. **The map.** Structure (freeform → structured) against setup effort, with a "tinker zone" at the top and "open and go" at the bottom. Hover a tool to see when to use it and when to avoid it.
 4. **Which one for me?** Pick a goal and answer only the questions that matter for it. Time tracking asks why you need it and can recommend skipping it. Each tool gets a fit score with the reasons behind it, and a "you" dot moves on the map.
-5. **Possible toolkit.** The same answers applied across the jobs; if your answers show no concrete need, it says you probably don't need time tracking.
+5. **Possible toolkit.** The same answers applied across the jobs; if your answers show no clear need, it says you probably don't need time tracking.
 6. **Cheat sheet.** "If this sounds like you…" sentences against each tool, rated great / good / meh / —. Filter by job to compare just those tools; hover a row to see why.
 
 The fit scores are hand-tuned weights for guidance, not research or medical advice. Tool facts were written in late 2026 and can drift as products change.

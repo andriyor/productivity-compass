@@ -159,9 +159,9 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
       <div className="rounded-xl bg-surface p-5 ring-1 ring-white/10" aria-live="polite">
         {noTimeTrackingNeeded ? (
           <>
-            <p className="text-xs uppercase tracking-wide text-muted">Best fit for time tracking</p>
+            <p className="text-xs uppercase tracking-wide text-muted">Time tracking</p>
             <p className="mt-1 text-3xl font-semibold">You probably don’t need a time tracker</p>
-            <p className="mt-2 text-ink-2">None of your answers points to a concrete decision or requirement that time tracking would improve. Focus on finished work and deadlines; reconsider if one of these needs changes.</p>
+            <p className="mt-2 text-ink-2">You didn’t mark a reason that needs a timer. Focus on finished work and deadlines instead — and revisit this if you start billing hours or need data on where your time goes.</p>
           </>
         ) : first ? (
           <>

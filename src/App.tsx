@@ -112,7 +112,7 @@ export default function App() {
         <Chooser answers={answers} onChange={setAnswers} />
       </Section>
 
-      <Section n="05" title="Possible toolkit" lead="Recommendations for different needs. Time tracking can help with billable records, better estimates, focus support, or understanding where your hours go.">
+      <Section n="05" title="Possible toolkit" lead="Your answers above applied across every job — with time tracking skipped unless you need it for billing, estimates, focus or seeing where hours go.">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(GOALS) as Goal[]).map((g) => {
             const best = recommend({ ...answers, goal: g })[0]
@@ -124,7 +124,7 @@ export default function App() {
                   <>
                     <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
                     <p className="mt-2 text-sm text-ink-2">
-                      Pick “Time tracking” in 04 if you bill hours, refine estimates, investigate where time goes, or use a timer to focus.
+                      Pick “Time tracking” in 04 if you bill hours, refine estimates, see where your hours go, or use a timer to focus.
                     </p>
                   </>
                 ) : best && (
