@@ -9,7 +9,7 @@ A visual guide to choosing tools for **notes**, **tasks** and **habits**, with *
 1. **Four possible jobs, four questions.** A Venn diagram of which jobs each tool covers. Pick tools for the jobs you actually have; time tracking helps when it answers a specific question or requirement. Tasks is the hub; the overlaps are the all-in-ones (Obsidian, Lunatask, Notion, Logseq, Griply, ClickUp). Hover a tool to highlight its circles.
 2. **It depends on your brain.** ADHD-ish and anxious-ish working styles side by side: starting, options, tracking, habits, and what helps. Working styles, not diagnoses.
 3. **The map.** Structure (freeform → structured) against setup effort, with a "tinker zone" at the top and "open and go" at the bottom. Hover a tool to see when to use it and when to avoid it.
-4. **Which one for me?** Pick a goal first. Notes, tasks and habits start by checking whether your current method works; time tracking asks what you need it for and frames the log as observation, not a productivity score. The recommendation and map update as you click.
+4. **Which one for me?** Pick a goal first. Notes, tasks and habits start by checking whether your current method works; time tracking asks what you need it for and frames the log as observation, not a productivity score. The recommendation and map update as you explore, with a satirical video about productivity systems below.
 5. **Possible toolkit.** Your answers above applied across every job. Keep your current method where it works; time tracking stays optional.
 6. **Cheat sheet.** "If this sounds like you…" sentences against each tool, rated great / good / meh / —. Filter by job to compare just those tools; hover a row to see why.
 

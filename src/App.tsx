@@ -113,6 +113,23 @@ export default function App() {
 
       <Section n="04" title="Which one for me?" lead="Pick a goal first. Notes, tasks and habits start by checking whether your current method works; time tracking asks what you need it for. The recommendation and map update as you click.">
         <Chooser answers={answers} onChange={setAnswers} />
+        <div className="mt-8 overflow-hidden rounded-xl bg-surface ring-1 ring-white/10">
+          <div className="p-4">
+            <h3 className="font-semibold">Interview with a Productivity Freak in 2026</h3>
+            <p className="mt-1 text-sm text-muted">A satirical take on productivity systems and the urge to track everything.</p>
+          </div>
+          <div className="aspect-video">
+            <iframe
+              className="h-full w-full"
+              src="https://www.youtube-nocookie.com/embed/guvFKt_Zjqw?cc_load_policy=1&cc_lang_pref=en"
+              title="Interview with a Productivity Freak in 2026"
+              loading="lazy"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+            />
+          </div>
+        </div>
       </Section>
 
       <Section n="05" title="Possible toolkit" lead="Your answers above applied across every job. Keep your current method where it works; time tracking stays optional.">
