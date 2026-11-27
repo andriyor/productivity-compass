@@ -2,15 +2,15 @@
 
 **Live: https://productivity-compass.vercel.app/**
 
-A visual guide to picking a **time tracker**, a **notes app**, a **task manager** and a **habit tracker** by how you work: alone or in a team, scattered (ADHD-ish) or anxious. It covers Toggl Track, Clockify, RescueTime, Apple Notes, Obsidian, Logseq, Notion, Things 3, Todoist, Linear, ClickUp, Lunatask, Griply, Loop Habit Tracker, Streaks and Habitica.
+A visual guide to choosing tools for **notes**, **tasks** and **habits**, with **optional time tracking** when you have a concrete need such as billing clients, estimating work, or finding where your hours go. It matches tools to how you work: alone or in a team, scattered (ADHD-ish) or anxious. It covers Toggl Track, Clockify, RescueTime, Apple Notes, Obsidian, Logseq, Notion, Things 3, Todoist, Linear, ClickUp, Lunatask, Griply, Loop Habit Tracker, Streaks and Habitica.
 
 ## What's on the page
 
-1. **Four jobs, four questions.** A Venn diagram of which jobs each tool covers. Tasks is the hub; the overlaps are the all-in-ones (Obsidian, Lunatask, Notion, Logseq, Griply, ClickUp). Hover a tool to highlight its circles.
+1. **Four possible jobs, four questions.** A Venn diagram of which jobs each tool covers. Choose tools for the needs you want to solve; time tracking is useful when it supports a real decision or requirement. Tasks is the hub; the overlaps are the all-in-ones (Obsidian, Lunatask, Notion, Logseq, Griply, ClickUp). Hover a tool to highlight its circles.
 2. **It depends on your brain.** ADHD-ish and anxious-ish working styles side by side: starting, options, tracking, habits, and what helps. Working styles, not diagnoses.
 3. **The map.** Structure (freeform → structured) against setup effort, with a "tinker zone" at the top and "open and go" at the bottom. Hover a tool to see when to use it and when to avoid it.
-4. **Which one for me?** Pick a goal and answer only the questions that matter for it. Each tool gets a fit score with the reasons behind it, and a "you" dot moves on the map.
-5. **Your stack.** The same answers applied to all four jobs: one recommended tool each.
+4. **Which one for me?** Pick a goal and answer only the questions that matter for it. Time tracking asks why you need it and can recommend skipping it. Each tool gets a fit score with the reasons behind it, and a "you" dot moves on the map.
+5. **Possible toolkit.** The same answers applied across the jobs; if your answers show no concrete need, it says you probably don't need time tracking.
 6. **Cheat sheet.** "If this sounds like you…" sentences against each tool, rated great / good / meh / —. Filter by job to compare just those tools; hover a row to see why.
 
 The fit scores are hand-tuned weights for guidance, not research or medical advice. Tool facts were written in late 2026 and can drift as products change.

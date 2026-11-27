@@ -2,6 +2,10 @@ import { TOOL_IDS, TOOLS, type Goal, type ToolId } from './tools.ts'
 
 export type Answers = {
   goal: Goal
+  timeBilling?: 'yes' | 'no'
+  timeEstimates?: 'yes' | 'no'
+  timeInsight?: 'yes' | 'no'
+  timeFocus?: 'yes' | 'no'
   who: 'solo' | 'team'
   forget: 'yes' | 'no' // forgets timers / loses thoughts before capturing
   options: 'overwhelm' | 'neutral' | 'tinker'
@@ -12,8 +16,13 @@ export type Answers = {
 
 export type Score = { id: ToolId; score: number; why: string[] }
 
+export const hasTimeTrackingNeed = (a: Answers) =>
+  a.timeBilling === 'yes' || a.timeEstimates === 'yes' || a.timeInsight === 'yes' || a.timeFocus === 'yes'
+
 // shortcut: hand-tuned heuristic weights for guidance, not research; tune with real user feedback.
 export function recommend(a: Answers): Score[] {
+  if (a.goal === 'time' && [a.timeBilling, a.timeEstimates, a.timeInsight, a.timeFocus].every((answer) => answer === 'no')) return []
+
   const out: Score[] = []
   for (const id of TOOL_IDS) {
     const t = TOOLS[id]
@@ -23,6 +32,24 @@ export function recommend(a: Answers): Score[] {
     const add = (n: number, w: string) => {
       score += n
       why.push((n > 0 ? '+ ' : '− ') + w)
+    }
+
+    if (a.goal === 'time') {
+      if (a.timeBilling === 'yes') {
+        if (id === 'toggl' || id === 'clockify') add(18, 'Client billing and time reports are a core use')
+        else if (id === 'clickup') add(8, 'Tracks time against client tasks')
+      }
+      if (a.timeEstimates === 'yes') {
+        if (id === 'toggl') add(18, 'Actual task durations help improve future estimates')
+        else if (id === 'clickup') add(12, 'Combines task planning with time records')
+      }
+      if (a.timeInsight === 'yes') {
+        if (id === 'rescuetime') add(24, 'Automatic activity reports show where computer time goes')
+        else if (id === 'toggl') add(8, 'Project and tag reports show where tracked time goes')
+      }
+      if (a.timeFocus === 'yes' && id === 'rescuetime') {
+        add(20, 'Focus sessions can block distracting sites')
+      }
     }
 
     if (t.goals[0] !== a.goal) add(-10, 'A side feature here, not its main job')
