@@ -1,8 +1,20 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
-import { recommend, type Answers } from './recommend.ts'
+import { hasTimeTrackingNeed, recommend, type Answers } from './recommend.ts'
 
-const base: Answers = { goal: 'time', who: 'solo', forget: 'no', options: 'neutral', watched: 'motivated', data: 'cloud', budget: 'paid' }
+const base: Answers = {
+  goal: 'time',
+  timeBilling: 'yes',
+  timeEstimates: 'no',
+  timeInsight: 'no',
+  timeFocus: 'no',
+  who: 'solo',
+  forget: 'no',
+  options: 'neutral',
+  watched: 'motivated',
+  data: 'cloud',
+  budget: 'paid',
+}
 const top = (a: Partial<Answers>) => recommend({ ...base, ...a })[0].id
 
 test('forgetful solo who is fine being tracked → RescueTime', () => {
@@ -51,4 +63,11 @@ test('forgetful habit builder → Streaks (Apple Health ticks habits off)', () =
 })
 test('private tinkerer tracking habits → Obsidian (Life Tracker plugin)', () => {
   assert.equal(top({ goal: 'habits', options: 'tinker', data: 'local' }), 'obsidian')
+})
+test('no time-tracking need → empty recommendations and false flag', () => {
+  const noNeed: Answers = { ...base, timeBilling: 'no' }
+  assert.equal(hasTimeTrackingNeed(noNeed), false)
+  assert.deepEqual(recommend(noNeed), [])
+  assert.equal(hasTimeTrackingNeed(base), true)
+  assert.ok(recommend(base).length > 0)
 })
