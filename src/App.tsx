@@ -1,6 +1,6 @@
 import { useState, type ReactNode } from 'react'
 import { siGithub } from 'simple-icons'
-import { markerFor, recommend, type Answers } from './recommend.ts'
+import { hasTimeTrackingNeed, markerFor, recommend, type Answers } from './recommend.ts'
 import { ToolIcon } from './ToolIcon.tsx'
 import { GOALS, TOOL_IDS, TOOLS, type Goal } from './tools.ts'
 import { Chooser } from './sections/Chooser.tsx'
@@ -19,6 +19,10 @@ const STYLES = [
 export default function App() {
   const [answers, setAnswers] = useState<Answers>({
     goal: 'notes',
+    timeBilling: 'no',
+    timeEstimates: 'no',
+    timeInsight: 'no',
+    timeFocus: 'no',
     who: 'solo',
     forget: 'yes',
     options: 'overwhelm',
@@ -52,9 +56,8 @@ export default function App() {
           The best tool is the one <span className="text-notes">you’ll still use</span> next month.
         </h1>
         <p className="mt-5 max-w-2xl text-lg text-ink-2">
-          Pick a <b className="text-time">time tracker</b>, a <b className="text-notes">notes app</b>, a <b className="text-tasks">task manager</b> and a{' '}
-          <b className="text-habits">habit tracker</b> by how
-          you work — alone or in a team, scattered or anxious — not by feature lists.
+          Pick tools for the jobs you actually need — <b className="text-notes">notes</b>, <b className="text-tasks">tasks</b> and{' '}
+          <b className="text-habits">habits</b> — by how you work, not by feature lists. <b className="text-time">Time tracking is optional</b>: use it when you have a clear reason, like billing or estimating.
         </p>
         <ul className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm text-muted">
           {TOOL_IDS.map((id) => (
@@ -68,8 +71,8 @@ export default function App() {
 
       <Section
         n="01"
-        title="Four jobs, four questions"
-        lead="Most people need one tool per job. Tools in the overlaps cover several — and every overlap runs through tasks."
+        title="Four possible jobs, four questions"
+        lead="Pick tools for the jobs you actually have. Time tracking helps when it answers a specific question or requirement; tools in the overlaps cover more than one job."
       >
         <Venn />
       </Section>
@@ -109,18 +112,30 @@ export default function App() {
         <Chooser answers={answers} onChange={setAnswers} />
       </Section>
 
-      <Section n="05" title="Your stack" lead="The same answers, applied to all four jobs.">
+      <Section n="05" title="Possible toolkit" lead="Your answers above applied across every job — with time tracking skipped unless you need it for billing, estimates, focus or seeing where hours go.">
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {(Object.keys(GOALS) as Goal[]).map((g) => {
             const best = recommend({ ...answers, goal: g })[0]
+            const noTimeTracker = g === 'time' && !hasTimeTrackingNeed(answers)
             return (
               <div key={g} className="rounded-xl bg-surface p-5 ring-1 ring-white/10" style={{ borderTop: `3px solid ${GOALS[g].color}` }}>
-                <p className="text-xs uppercase tracking-wide text-muted">{GOALS[g].name}</p>
-                <p className="mt-2 flex items-center gap-2 text-xl font-semibold">
-                  <ToolIcon id={best.id} size={22} />
-                  {TOOLS[best.id].name}
-                </p>
-                <p className="mt-2 text-sm text-ink-2">{TOOLS[best.id].tagline}</p>
+                <p className="text-xs uppercase tracking-wide text-muted">{g === 'time' ? 'Optional · Time tracking' : GOALS[g].name}</p>
+                {noTimeTracker ? (
+                  <>
+                    <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
+                    <p className="mt-2 text-sm text-ink-2">
+                      Pick “Time tracking” in 04 if you bill hours, refine estimates, see where your hours go, or use a timer to focus.
+                    </p>
+                  </>
+                ) : best && (
+                  <>
+                    <p className="mt-2 flex items-center gap-2 text-xl font-semibold">
+                      <ToolIcon id={best.id} size={22} />
+                      {TOOLS[best.id].name}
+                    </p>
+                    <p className="mt-2 text-sm text-ink-2">{TOOLS[best.id].tagline}</p>
+                  </>
+                )}
               </div>
             )
           })}
