@@ -121,7 +121,12 @@ export default function App() {
               <div key={g} className="rounded-xl bg-surface p-5 ring-1 ring-white/10" style={{ borderTop: `3px solid ${GOALS[g].color}` }}>
                 <p className="text-xs uppercase tracking-wide text-muted">{g === 'time' ? 'Optional · Time tracking' : GOALS[g].name}</p>
                 {noTimeTracker ? (
-                  <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
+                  <>
+                    <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
+                    <p className="mt-2 text-sm text-ink-2">
+                      Pick “Time tracking (optional)” in 04 if you bill hours, refine estimates, investigate where time goes, or use a timer to focus.
+                    </p>
+                  </>
                 ) : best && (
                   <>
                     <p className="mt-2 flex items-center gap-2 text-xl font-semibold">
