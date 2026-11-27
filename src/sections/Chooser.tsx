@@ -7,7 +7,7 @@ type Option<K extends keyof Answers> = { value: NonNullable<Answers[K]>; label: 
 const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, string>>; goals?: Goal[]; options: Option<K>[] } } = {
   goal: {
     q: 'What do you want to fix first? Time tracking is optional.',
-    options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: g === 'time' ? 'Time tracking (optional)' : GOALS[g].name })),
+    options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: GOALS[g].name })),
   },
   timeBilling: {
     q: 'Do you need to submit timesheets or bill clients by the hour?',

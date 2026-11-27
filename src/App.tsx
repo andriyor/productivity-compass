@@ -124,7 +124,7 @@ export default function App() {
                   <>
                     <p className="mt-2 text-xl font-semibold">You probably don’t need a time tracker</p>
                     <p className="mt-2 text-sm text-ink-2">
-                      Pick “Time tracking (optional)” in 04 if you bill hours, refine estimates, investigate where time goes, or use a timer to focus.
+                      Pick “Time tracking” in 04 if you bill hours, refine estimates, investigate where time goes, or use a timer to focus.
                     </p>
                   </>
                 ) : best && (
