@@ -40,7 +40,7 @@ export function recommend(a: Answers): Score[] {
         else if (id === 'clickup') add(8, 'Tracks time against client tasks')
       }
       if (a.timeEstimates === 'yes') {
-        if (id === 'toggl') add(18, 'Actual task durations help improve future estimates')
+        if (id === 'toggl') add(18, 'Logs actual task times so future estimates get sharper')
         else if (id === 'clickup') add(12, 'Combines task planning with time records')
       }
       if (a.timeInsight === 'yes') {
