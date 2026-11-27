@@ -18,7 +18,7 @@ const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, st
     ],
   },
   timeEstimates: {
-    q: 'Do inaccurate task estimates cause problems you want past time records to help fix?',
+    q: 'Do you want past timings to improve your task estimates?',
     goals: ['time'],
     options: [
       { value: 'no', label: 'No' },
@@ -26,7 +26,7 @@ const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, st
     ],
   },
   timeInsight: {
-    q: 'Do you have a concrete question about where work time goes that you plan to act on?',
+    q: 'Are you trying to answer a specific question about where your hours go?',
     goals: ['time'],
     options: [
       { value: 'no', label: 'No' },
@@ -34,7 +34,7 @@ const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, st
     ],
   },
   timeFocus: {
-    q: 'Has a running timer reliably helped you focus enough to justify recording your work time?',
+    q: 'Does a running timer help you start or stay focused?',
     goals: ['time'],
     options: [
       { value: 'no', label: 'No' },
