@@ -177,7 +177,7 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
             <div className="space-y-3 rounded-lg bg-surface/70 p-3 text-sm text-ink-2">
               <p><strong className="text-ink">You don’t have to track everything.</strong> If nobody needs a timesheet, track only a few activities you want to understand; leave routine things untracked.</p>
               <p><strong className="text-ink">Need a start cue?</strong> Try one 20-minute timer on one task; keep it only if it helps you get moving, not as a scorecard.</p>
-              <p><strong className="text-ink">Use the log as observation, not judgment.</strong> Hours show where time went, not whether they were well spent. Review weekly, and stop if tracking adds pressure.</p>
+              <p><strong className="text-ink">Use the log as a snapshot, not a verdict.</strong> It reflects the categories you chose, not proof of progress or value. Review weekly, and stop if tracking adds pressure or becomes work of its own.</p>
             </div>
             <div className="space-y-4">
               {TIME_SCREENING_QUESTIONS.map(renderQuestion)}
