@@ -172,12 +172,12 @@ export function Chooser({ answers, onChange }: { answers: Answers; onChange: (a:
           <div className="space-y-4 rounded-xl border border-time/30 bg-time/5 p-4">
             <div>
               <h3 className="text-sm font-semibold text-ink">Does tracking solve a real problem?</h3>
-              <p className="mt-1 text-sm text-muted">A few quick checks decide whether a timer would be useful at all.</p>
+              <p className="mt-1 text-sm text-muted">Four quick questions to see whether a timer would help.</p>
             </div>
             <div className="space-y-3 rounded-lg bg-surface/70 p-3 text-sm text-ink-2">
-              <p><strong className="text-ink">You don’t have to track everything.</strong> If you work solo and nobody needs a timesheet, a task list or an end-of-day note like “fixed the bug” may be enough. You can leave routine things like breaks, meals, email, and chores untracked.</p>
-              <p><strong className="text-ink">If you have ADHD,</strong> a timer can be a start cue, not a score: try it for one task, such as 20 minutes to begin a report, and keep it only if it helps you get going.</p>
-              <p><strong className="text-ink">If tracking makes you anxious,</strong> you don’t need minute-by-minute proof that you were productive. Track only what answers a real question, such as billable client time or how long one kind of task takes.</p>
+              <p><strong className="text-ink">You don’t have to track everything.</strong> If nobody needs a timesheet, track only a few activities you want to understand; leave routine things untracked.</p>
+              <p><strong className="text-ink">Need a start cue?</strong> Try one 20-minute timer on one task; keep it only if it helps you get moving, not as a scorecard.</p>
+              <p><strong className="text-ink">Use the log as observation, not judgment.</strong> Hours show where time went, not whether they were well spent. Review weekly, and stop if tracking adds pressure.</p>
             </div>
             <div className="space-y-4">
               {TIME_SCREENING_QUESTIONS.map(renderQuestion)}
