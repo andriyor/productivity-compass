@@ -2,9 +2,9 @@ import { hasTimeTrackingNeed, recommend, type Answers } from '../recommend.ts'
 import { ToolIcon } from '../ToolIcon.tsx'
 import { colorOf, GOALS, TOOLS, type Goal } from '../tools.ts'
 
-type Option<K extends keyof Answers> = { value: Answers[K]; label: string }
+type Option<K extends keyof Answers> = { value: NonNullable<Answers[K]>; label: string }
 // `goals` limits a question to the goals it changes the answer for; `q` may be worded per goal.
-const QUESTIONS: { [K in keyof Answers]: { q: string | Partial<Record<Goal, string>>; goals?: Goal[]; options: Option<K>[] } } = {
+const QUESTIONS: { [K in keyof Answers]-?: { q: string | Partial<Record<Goal, string>>; goals?: Goal[]; options: Option<K>[] } } = {
   goal: {
     q: 'What do you want to fix first? Time tracking is optional.',
     options: (Object.keys(GOALS) as Goal[]).map((g) => ({ value: g, label: g === 'time' ? 'Time tracking (optional)' : GOALS[g].name })),
